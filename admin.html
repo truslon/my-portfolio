@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #1f2937;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      margin-bottom: 15px;
+      color: #111827;
+    }
+    .search-box {
+      margin-bottom: 20px;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    table th, table td {
+      border: 1px solid #e5e7eb;
+      padding: 10px;
+      text-align: left;
+    }
+    table th {
+      background: #f9fafb;
+    }
+    tr:nth-child(even) {
+      background: #f3f4f6;
+    }
+    .logout {
+      margin-top: 20px;
+      display: inline-block;
+      padding: 10px 20px;
+      background: #ef4444;
+      color: #fff;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+    .logout:hover {
+      background: #dc2626;
+    }
+    /* Login form */
+    .login-box {
+      max-width: 400px;
+      margin: 100px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .login-box input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+    }
+    .login-box button {
+      width: 100%;
+      padding: 10px;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .login-box button:hover {
+      background: #1d4ed8;
+    }
+  </style>
+</head>
+<body>
+  <!-- Login form -->
+  <div id="loginBox" class="login-box">
+    <h2>Admin Login</h2>
+    <input type="text" id="username" placeholder="Login" />
+    <input type="password" id="password" placeholder="Parol" />
+    <button onclick="login()">Kirish</button>
+  </div>
+
+  <!-- Admin panel -->
+  <div id="adminPanel" style="display:none;">
+    <header>
+      <h1>Admin Panel</h1>
+    </header>
+    <div class="container">
+      <h2>Buyurtmalar ro‘yxati</h2>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Qidiruv (ism yoki email)..." />
+      </div>
+      <table id="ordersTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Ism</th>
+            <th>Email</th>
+            <th>WhatsApp</th>
+            <th>Buyurtma vaqti</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Jadvalga ma'lumotlar serverdan keladi -->
+        </tbody>
+      </table>
+      <a href="#" class="logout" onclick="logout()">Chiqish</a>
+    </div>
+  </div>
+
+  <script>
+    // Login tekshirish
+    function login() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+
+      if (user === "truslon" && pass === "ruslonbek11") {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("adminPanel").style.display = "block";
+        loadOrders();
+      } else {
+        alert("Login yoki parol noto‘g‘ri!");
+      }
+    }
+
+    // Logout
+    function logout() {
+      document.getElementById("adminPanel").style.display = "none";
+      document.getElementById("loginBox").style.display = "block";
+    }
+
+    // Buyurtmalarni olish (server.js dan)
+    async function loadOrders() {
+      try {
+        const res = await fetch("/orders");
+        const orders = await res.json();
+        const tbody = document.querySelector("#ordersTable tbody");
+        tbody.innerHTML = "";
+        orders.forEach((order, index) => {
+          const row = `
+            <tr>
+              <td>${index + 1}</td>
+              <td>${order.name}</td>
+              <td>${order.email}</td>
+              <td>${order.whatsapp}</td>
+              <td>${order.date}</td>
+            </tr>
+          `;
+          tbody.innerHTML += row;
+        });
+      } catch (err) {
+        console.error("Buyurtmalarni yuklab bo‘lmadi:", err);
+      }
+    }
+
+    // Qidiruv funksiyasi
+    document.getElementById("searchInput").addEventListener("keyup", function () {
+      const filter = this.value.toLowerCase();
+      const rows = document.querySelectorAll("#ordersTable tbody tr");
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(filter) ? "" : "none";
+      });
+    });
+  </script>
+</body>
+</html>

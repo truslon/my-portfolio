@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <img src="profile.jpg" alt="My Photo" class="profile-pic">
+      <h1>Ruslan Toraboyev</h1>
+      <p>Web Developer | Designer | Translator</p>
+    </div>
+  </header>
+
+  <!-- Services -->
+  <section class="services">
+    <h2>My Services</h2>
+    <div class="service-cards">
+      <div class="card">
+        <h3>Website Development</h3>
+        <p>Creating and customizing professional websites.</p>
+        <button onclick="orderNow('Website Development')">Order Now</button>
+      </div>
+      <div class="card">
+        <h3>Web Design</h3>
+        <p>Beautiful, modern, and responsive web designs.</p>
+        <button onclick="orderNow('Web Design')">Order Now</button>
+      </div>
+      <div class="card">
+        <h3>Logo Design</h3>
+        <p>Creative and unique logo design for your brand.</p>
+        <button onclick="orderNow('Logo Design')">Order Now</button>
+      </div>
+      <div class="card">
+        <h3>Translation</h3>
+        <p>Professional translations (Russian, English, Arabic, Uzbek).</p>
+        <button onclick="orderNow('Translation')">Order Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio -->
+  <section class="portfolio">
+    <h2>My Works</h2>
+    <div class="portfolio-gallery">
+      <img src="demo1.jpg" alt="Project 1">
+      <img src="demo2.jpg" alt="Project 2">
+      <img src="demo3.jpg" alt="Project 3">
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact">
+    <h2>Contact Me</h2>
+    <form id="orderForm">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <input type="tel" name="phone" placeholder="WhatsApp Number" required>
+      <textarea name="message" placeholder="Your Order Details" required></textarea>
+      <button type="submit">Send Order</button>
+    </form>
+    <p class="info">You will receive a reply within 12 hours ⏳</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Ruslan Toraboyev | All Rights Reserved</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    function orderNow(service) {
+      document.querySelector('textarea[name="message"]').value = 
+        "I want to order: " + service;
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+
+    // Order form handler
+    document.getElementById('orderForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert("✅ Your request has been sent! You will get a reply within 12 hours.");
+    });
+  </script>
+</body>
+</html>
+<!-- About Section -->
+<section id="about">
+  <h2>About Me</h2>
+  <p>I am a web developer and designer who creates professional websites, logos, and offers translation services.</p>
+</section>
+
+<!-- Services Section -->
+<section id="services">
+  <h2>My Services</h2>
+  <ul>
+    <li>🌐 Website Development & Setup</li>
+    <li>🎨 Web Design</li>
+    <li>✨ Logo Design</li>
+    <li>🌍 Translation Services</li>
+  </ul>
+</section>
+
+<!-- Portfolio Section -->
+<section id="portfolio">
+  <h2>Portfolio</h2>
+  <p>Here are some of my previous works (demo):</p>
+  <div class="portfolio-grid">
+    <div class="card">Demo Project 1</div>
+    <div class="card">Demo Project 2</div>
+    <div class="card">Demo Project 3</div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact">
+  <h2>Contact Me</h2>
+  <form action="/order" method="POST">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" placeholder="Your Message" required></textarea>
+    <button type="submit">Send</button>
+  </form>
+</section>
