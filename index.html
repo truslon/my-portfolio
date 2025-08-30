@@ -8,13 +8,16 @@
 </head>
 <body>
   <!-- Header -->
-  <header>
-    <div class="container">
-      <img src="profile.jpg" alt="My Photo" class="profile-pic">
-      <h1>Ruslan Toraboyev</h1>
-      <p>Web Developer | Designer | Translator</p>
-    </div>
-  </header>
+  <section id="hero" style="text-align:center; padding:50px;">
+  <img src="images/my-photo.jpg" alt="My Photo" style="width:200px; height:200px; border-radius:50%; object-fit:cover; box-shadow:0 4px 10px rgba(0,0,0,0.3);">
+  
+  <h1 style="margin-top:20px; font-size:32px;">Ruslanbek Tursunov</h1>
+  <p style="font-size:18px; color:#555; max-width:700px; margin:10px auto; line-height:1.6;">
+    I am a professional freelancer.  
+    I am fluent in <b>English, Russian, German, French, Italian, Spanish, Arabic, Portuguese, and Uzbek</b>.  
+    In addition, I am a specialist in <b>web design</b> and <b>web development</b>, creating modern and high-quality websites for businesses and individuals.
+  </p>
+  </section>
 
   <!-- Services -->
   <section class="services">
@@ -115,13 +118,4 @@
   </div>
 </section>
 
-<!-- Contact Section -->
-<section id="contact">
-  <h2>Contact Me</h2>
-  <form action="/order" method="POST">
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="email" placeholder="Your Email" required>
-    <textarea name="message" placeholder="Your Message" required></textarea>
-    <button type="submit">Send</button>
-  </form>
-</section>
+<a href="#order" class="btn">Buyurtma berish</a>
